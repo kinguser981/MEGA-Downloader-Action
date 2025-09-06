@@ -39,7 +39,6 @@ Can be downloaded at [Release](../../releases)
 |              Application to interact with your MEGA account.              |
 |         Please write to support@mega.nz if you find any issue or          |
 |            have any suggestion concerning its functionalities.            |
-| Enter "help --non-interactive" to learn how to use MEGAcmd with scripts.  |
-|       Enter "help" for basic info and a list of available commands.       |
+|                  https://github.com/meganz/MEGAcmd.git                    |
 `===========================================================================´
 ```
