@@ -1,0 +1,48 @@
+name: MEGA-Downloader
+
+on:
+  workflow_dispatch:
+    inputs:
+      FILE_LINK:
+        description: 'Link of Mega File'
+        required: true
+        default: 'https://mega.nz/folder/VQl0QbwA#wV8qEdMmOL1-eqgLvh_ocA'
+
+jobs:
+  build:
+    name: File downloader by ${{ github.actor }}
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Getting tools ready 
+      run: |
+        sudo apt install rar
+        wget https://mega.nz/linux/repo/xUbuntu_24.04/amd64/megacmd-xUbuntu_24.04_amd64.deb && sudo apt install "$PWD/megacmd-xUbuntu_24.04_amd64.deb"
+    
+    - name: Downloading file from Mega
+      run: |
+        mkdir Mega
+        echo "get ${{ github.event.inputs.FILE_LINK }} ./Mega" | mega-cmd
+        
+    - name: Processing Files
+      run: |
+        rar a -v2000m MEGA.rar ./Mega
+        ls -la
+        
+    - name: Set Build Date 
+      run: |
+        echo "BUILD_DATE=$(date +%Y%m%d)" >> $GITHUB_ENV
+        
+    - name: Upload to Github
+      uses: softprops/action-gh-release@v1
+      continue-on-error: true
+      with:
+        files: |
+          *.rar
+        name: MEGA-FILE // ${{ env.BUILD_DATE }}
+        tag_name: ${{ github.run_id }}
+        body: |
