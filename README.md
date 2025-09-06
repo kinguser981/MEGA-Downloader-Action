@@ -1,4 +1,6 @@
-# MEGA-Downloader-Action
+# MEGA-Downloader-Actions
+
+
 
 # a github actions to download files from MEGA and upload them to github release!
 
@@ -16,8 +18,12 @@
 
 6) click on "Run workflow"
 
+
 ## Compilation results
 Can be downloaded at [Release](../../releases)
+
+
+
 
 
 # Powered by MEGAcmd!
